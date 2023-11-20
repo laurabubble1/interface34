@@ -118,3 +118,10 @@ let isUpArrowPressed = false;
     callFunction(5);
     // Add your logic for when the right arrow key is released here
   }
+function startVideo() {
+    document.getElementById('video_feed').src = "{{ url_for('video_feed') }}";
+}
+
+function stopVideo() {
+    document.getElementById('video_feed').src = "";
+}

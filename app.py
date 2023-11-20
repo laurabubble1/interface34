@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-
+from flask import Flask, render_template, request, jsonify, Response
+import cv2
 #import motor
 #import automatique
 
@@ -9,7 +9,41 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
+@app.route('/start_feed')
+def start_feed():
+    init_camera()
+    return 'Video feed started'
 
+@app.route('/stop_feed')
+def stop_feed():
+    release_camera()
+    return 'Video feed stopped'
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+camera = None # Declare the camera variable
+
+def init_camera():
+    global camera
+    camera = cv2.VideoCapture(0)  # You may need to change the index if you have multiple cameras
+
+def release_camera():
+    global camera
+    if camera is not None:
+        camera.release()
+
+def generate_frames():
+    while True:
+        if camera is not None:
+            success, frame = camera.read()
+            if not success:
+                break
+            else:
+                ret, buffer = cv2.imencode('.jpg', frame)
+                frame = buffer.tobytes()
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 """
 
 @app.route('/call_function/<int:func_number>', methods=['GET'])
