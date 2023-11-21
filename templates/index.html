@@ -54,20 +54,31 @@
             </h1>
             <button style="text-align: center;">AUTO</button>
         </div>
+
+
+        <form action="/vitesse" method="POST">
+            <label for="vitesse_input">Define the vitesse:</label>
+            <input type="number" id="vitesse_input" name="vitesse" required>
+            <button type="submit">OK</button>
+        </form>
+        {% if vitesse %}
+        <p>The vitesse is {{ vitesse }}</p>
+        {% endif %}
+
     </div>
 
-<!--
-    <div style="grid-row: 3;">
-    <button onclick="startVideo()">Start Video Feed</button>
-    <button onclick="stopVideo()">Stop Video Feed</button>
 
-    
-   
-    <img id="video_feed" src="{{ url_for('video_feed') }}" width="640" height="480" />
-
-</div>
+    <div style="grid-column: 3;">
+        <h1 class="centrer" style="padding: 10%;">
+            CAMERA
+        </h1>
+        <img src="{{ url_for('video_feed') }}" width="100%" height = "50%">
+    </div>
             
--->
-    
+
+<script src="{{ url_for('static', filename='code copy.js') }}"></script>
+            
+        
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

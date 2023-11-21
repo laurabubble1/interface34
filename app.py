@@ -1,49 +1,51 @@
 from flask import Flask, render_template, request, jsonify, Response
 import cv2
+import time
+import argparse
+import imutils
+
+import sys
+
 #import motor
 #import automatique
 
 app = Flask(__name__)
 #Motor = motor.MotorDriver()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route('/start_feed')
-def start_feed():
-    init_camera()
-    return 'Video feed started'
 
-@app.route('/stop_feed')
-def stop_feed():
-    release_camera()
-    return 'Video feed stopped'
 
+
+
+
+
+def gen_frames():
+    cap = cv2.VideoCapture(0)
+
+    while True:
+        success, frame = cap.read()
+        if not success:
+            break
+        else:
+            # Encode the frame as JPEG
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+
+            # Yield the frame in a format suitable for Flask response
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+    cap.release()
 @app.route('/video_feed')
 def video_feed():
-    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-camera = None # Declare the camera variable
+    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def init_camera():
-    global camera
-    camera = cv2.VideoCapture(0)  # You may need to change the index if you have multiple cameras
 
-def release_camera():
-    global camera
-    if camera is not None:
-        camera.release()
 
-def generate_frames():
-    while True:
-        if camera is not None:
-            success, frame = camera.read()
-            if not success:
-                break
-            else:
-                ret, buffer = cv2.imencode('.jpg', frame)
-                frame = buffer.tobytes()
-                yield (b'--frame\r\n'
-                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 """
 
 @app.route('/call_function/<int:func_number>', methods=['GET'])
@@ -143,7 +145,20 @@ def recherche(aruco):
 
 # demi-tour
 """
+@app.route('/vitesse', methods=['GET', 'POST'])
+def vitesse():
+    result = None
+    vitesse = None
+    if request.method == 'POST':
+        # request.form['vitesse'] retrieves the value associated with the field
+        # <input type="number" id="vitesse_input" name="vitesse" required> 
+        vitesse = int(request.form['vitesse'])
+        vitesse_global = vitesse
+    # render_template('index.html', vitesse=vitesse, result=result): 
+    # This function call instructs Flask to render the HTML template named 'index.html'. 
+    # It passes the variables vitesse and result to the template.
+    return render_template('index.html', vitesse=vitesse)
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=8080)
+    app.run(host="0.0.0.0",port=5000)

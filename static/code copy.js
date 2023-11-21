@@ -67,7 +67,7 @@ var connection = new WebSocket('ws://' + "192.168.4.1" + ':81/', ['arduino']);
 
         var width, height, radius, x_orig, y_orig;
         function resize() {
-            radius = 100; // specify the radius to 200
+            radius = 50; // specify the radius to 200
             width = 500; //Sets the variable width to be equal to the windows width
             height = radius * 6.5; //Sets the variable height
             ctx.canvas.width = width; //sets the canvas width to be equal to variable width
@@ -82,7 +82,7 @@ var connection = new WebSocket('ws://' + "192.168.4.1" + ':81/', ['arduino']);
             y_orig = height / 3;
 
             ctx.beginPath();
-            ctx.arc(x_orig, y_orig, radius + 90, 0, Math.PI * 2, true);
+            ctx.arc(x_orig, y_orig, radius + 50, 0, Math.PI * 2, true);
             ctx.fillStyle = '#ECE5E5';
             ctx.fill();
         }
