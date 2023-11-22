@@ -18,8 +18,19 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/Manuel')
+def manuel():
+    return render_template('manuel.html')
+
+@app.route('/Auto')
+def auto():
+    return render_template('auto.html')
 
 
+@app.route('/Camera')
+
+def cam():
+    return render_template('camera.html')
 
 
 def gen_frames():

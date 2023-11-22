@@ -9,9 +9,6 @@ function callFunction(Number) {
 
 
 
-
-
-
 let isUpArrowPressed = false;
   let isDownArrowPressed = false;
   let isLeftArrowPressed = false;

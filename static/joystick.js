@@ -83,16 +83,16 @@ var connection = new WebSocket('ws://' + "192.168.4.1" + ':81/', ['arduino']);
 
             ctx.beginPath();
             ctx.arc(x_orig, y_orig, radius + 50, 0, Math.PI * 2, true);
-            ctx.fillStyle = '#ECE5E5';
+            ctx.fillStyle = '#838586';
             ctx.fill();
         }
 //Draw joystick
         function joystick(width, height) {
             ctx.beginPath();
             ctx.arc(width, height, radius, 0, Math.PI * 2, true);
-            ctx.fillStyle = ' #d722ff ';
+            ctx.fillStyle = '#1c78a6 ';
             ctx.fill();
-            ctx.strokeStyle = ' #ec97ff ';
+            ctx.strokeStyle = '#186c96';
             ctx.lineWidth = 8;
             ctx.stroke();
         }

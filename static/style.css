@@ -5,11 +5,11 @@
     grid-template-rows: 0fr 0fr;
     height: 72px;
     width: 72px;
-    border: 2px solid #161616;
-    
+    border: 2px solid #d7d5d5;
+    border-radius: 20px;
     margin-left: auto;
     margin-right: auto;
-    background-color: aquamarine;
+    background-color: #838586;
 }
 
 .svg-container {
@@ -40,25 +40,112 @@
     grid-row: 3;
     grid-column: 2;
 }
-.heading {
- height: 100px;
- background-color: rgb(161, 203, 240);
+
+
+
+nav {
+	margin: 27px auto 0;
+
+	position: relative;
+	width: 590px;
+	height: 200px;
+	background-color: #34495e;
+	border-radius: 8px;
+	font-size: 0;
+}
+nav a {
+	line-height: 200px;
+	height: 100%;
+	font-size: 25px;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+nav .animation {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 0;
+	transition: all .5s ease 0s;
+	border-radius: 8px;
+}
+a:nth-child(1) {
+	width: 190px;
+}
+a:nth-child(2) {
+	width: 210px;
+}
+a:nth-child(3) {
+	width: 190px;
 }
 
-.aligner {
-    display: grid;
-    width: 500px;
+
+nav .start-home, a:nth-child(1):hover~.animation {
+	width: 190px;
+	left: 0;
+	background-color: #1abc9c;
+}
+nav .start-about, a:nth-child(2):hover~.animation {
+	width: 210px;
+	left: 190px;
+	background-color: #e74c3c;
+}
+nav .start-blog, a:nth-child(3):hover~.animation {
+	width: 190px;
+	left: 400px;
+	background-color: #3498db;
 }
 
-.centrer{
+
+body {
+	font-size: 12px;
+	font-family: sans-serif;
+	background: #2c3e50;
+    overflow-y: hidden;
+}
+h1 {
+	text-align: center;
+	margin: 40px 0 40px;
+	text-align: center;
+	font-size: 30px;
+	color: #ecf0f1;
+	text-shadow: 2px 2px 4px #000000;
+	font-family: 'Cherry Swash';
+}
+
+p {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
     text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: rgb(85, 84, 84);
-    margin: 0%  ;
+    color: #ecf0f1;
+    font-family: 'Cherry Swash';
+    font-size: 16px;
 }
-.aff{
+
+span {
+    color: #2BD6B4;
+}
+.boxing {
+    margin: 5%;
+    background-color: #4f5f6f;
+    padding: 10%;
     display: grid;
+    margin-bottom: 5%;
+    border-radius: 20px;
+    
 }
-.affj{
+
+.boxingright{
+    grid-column: 1;
+    grid-row: 1;
+}
+.boxingleft{
+    grid-row: 1;
     grid-column: 2;
 }
